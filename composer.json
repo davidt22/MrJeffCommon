@@ -1,0 +1,37 @@
+{
+    "name" : "MrJeff/CommonBundle",
+    "version": "1.0.0-alpha",
+    "description" : "Common library for MrJeff projects",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "David Teruel Jorge",
+        "email" : "david@mrjeffapp.com",
+        "homepage": "http://www.mrjeffapp.com"
+    }],
+    "keywords" : [
+        "common",
+        "library",
+        "api",
+        "webapps"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+        "php": ">=5.5",
+        "symfony/framework-bundle": ">=3.1.*",
+        "symfony/symfony": ">=3.1.*"
+    },
+    "autoload" : {
+        "psr-0" : {
+          "MrJeff\\CommonBundle" : ""
+        }
+    },
+    "target-dir" : "MrJeff/CommonBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+        "branch-alias" : {
+      }
+    }
+}
