@@ -1,5 +1,5 @@
 {
-    "name" : "mrjeff/commonbundle",
+    "name" : "mrjeff/common",
     "version": "1.0.0-alpha",
     "description" : "Common library for MrJeff projects",
     "type" : "symfony-bundle",
@@ -24,7 +24,7 @@
     },
     "autoload" : {
         "psr-0" : {
-          "mrjeff\\commonbundle" : ""
+          "mrjeff\\common" : ""
         }
     },
     "extra" : {
