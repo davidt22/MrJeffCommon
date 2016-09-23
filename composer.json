@@ -1,5 +1,5 @@
 {
-    "name" : "MrJeff/CommonBundle",
+    "name" : "mrjeff/common",
     "version": "1.0.0-alpha",
     "description" : "Common library for MrJeff projects",
     "type" : "symfony-bundle",
