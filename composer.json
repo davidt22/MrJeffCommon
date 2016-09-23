@@ -27,9 +27,6 @@
           "mrjeff\\commonbundle" : ""
         }
     },
-    "target-dir" : "mrjeff/commonbundle",
-    "repositories" : [{
-    }],
     "extra" : {
         "branch-alias" : {
       }
