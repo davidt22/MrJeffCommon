@@ -4,21 +4,21 @@ services:
         arguments: ['http://idontwash.com:8181']
     mrjeff.authorization_api:
         class: MrJeff\CommonBundle\Services\AuthorizationAPI
-        arguments: [@mrjeff.request_manager_api]
+        arguments: ['@mrjeff.request_manager_api']
     mrjeff.data_transformer_api:
         class: MrJeff\CommonBundle\Services\DataTransformerAPI
     mrjeff.jeff_operations_api:
         class: MrJeff\CommonBundle\Services\JeffOperationsAPI
-        arguments: [@mrjeff.request_manager_api]
+        arguments: ['@mrjeff.request_manager_api']
     mrjeff.jeff_position_operations_api:
         class: MrJeff\CommonBundle\Services\JeffPositionOperationsAPI
-        arguments: [@mrjeff.request_manager_api]
+        arguments: ['@mrjeff.request_manager_api']
     mrjeff.order_operations_api:
         class: MrJeff\CommonBundle\Services\OrderOperationsAPI
-        arguments: [@mrjeff.request_manager_api]
+        arguments: ['@mrjeff.request_manager_api']
     mrjeff.product_operations_api:
         class: MrJeff\CommonBundle\Services\ProductOperationsAPI
-        arguments: [@mrjeff.request_manager_api]
+        arguments: ['@mrjeff.request_manager_api']
     mrjeff.user_operations_api:
         class: MrJeff\CommonBundle\Services\UserOperationsAPI
-        arguments: [@mrjeff.request_manager_api]
+        arguments: ['@mrjeff.request_manager_api']
