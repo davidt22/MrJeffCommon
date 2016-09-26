@@ -1,5 +1,5 @@
 {
-    "name" : "mrjeffcommon",
+    "name" : "mrjeff/common",
     "description" : "Common library for MrJeff projects",
     "type" : "symfony-bundle",
     "authors" : [{
