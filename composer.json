@@ -1,5 +1,5 @@
 {
-    "name" : "mrjeff/common-bundle",
+    "name" : "mrjeff-common/common-bundle",
     "description" : "Common library for MrJeff projects",
     "type" : "symfony-bundle",
     "authors" : [{
@@ -23,12 +23,6 @@
         "guzzlehttp/guzzle": "^6.2"
     },
     "autoload" : {
-        "psr-4" : {
-          "Mrjeff\\CommonBundle\\" : ""
-        }
-    },
-    "extra" : {
-        "branch-alias" : {
-      }
+        "psr-4" : { "CommonBundle\\" : "" }
     }
 }
