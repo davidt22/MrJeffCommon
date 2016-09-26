@@ -1,17 +1,25 @@
 <?php
 
-namespace MrJeff\CommonBundle\Controller;
+namespace MrJeff\CommandBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends CoreController
 {
     /**
-     * @Route("/")
+     * @Route("/test-authorization", name="test_authorization")
      */
-    public function indexAction()
+    public function testAuthorizationAction(Request $request)
     {
-        return $this->render('CommonBundle:Default:index.html.twig');
+        try{
+            $authorizationAPIService = $this->get('mrjeff.authorization_api');
+            $user = $authorizationAPIService->authenticateUser('david@mrjeffapp.com', 'david.mrjeff');
+
+            var_dump($user);
+
+        }catch(\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
