@@ -20,7 +20,7 @@ class RequestManagerAPI
      *
      * @param string $apiUrl
      */
-    public function __construct($apiUrl = '')
+    public function __construct($apiUrl = 'http://idontwash.com:8181')
     {
         $this->baseUrl = $apiUrl;
     }
