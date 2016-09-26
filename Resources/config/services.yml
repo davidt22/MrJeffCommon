@@ -1,7 +1,7 @@
 services:
     mrjeff.request_manager_api:
         class: MrJeff\CommonBundle\Services\RequestManagerAPI
-        arguments: ['http://idontwash.com:8181']
+        arguments: ['%api_url%']
     mrjeff.authorization_api:
         class: MrJeff\CommonBundle\Services\AuthorizationAPI
         arguments: ['@mrjeff.request_manager_api']
