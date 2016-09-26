@@ -1,5 +1,5 @@
 {
-    "name" : "mrjeff/common",
+    "name" : "mrjeff/commonBundle",
     "description" : "Common library for MrJeff projects",
     "type" : "symfony-bundle",
     "authors" : [{
@@ -24,7 +24,7 @@
     },
     "autoload" : {
         "psr-4" : {
-          "mrjeff\\common\\" : ""
+          "Mrjeff\\CommonBundle\\" : ""
         }
     },
     "extra" : {
