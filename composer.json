@@ -23,6 +23,6 @@
         "guzzlehttp/guzzle": "^6.2"
     },
     "autoload" : {
-        "psr-4" : { "CommonBundle\\" : "" }
+        "psr-4" : { "MrJeff\\CommonBundle\\" : "" }
     }
 }
