@@ -96,9 +96,15 @@ class RequestManagerAPI
                     //                }else{
                     //                    return false;
                     //                }
+                }elseif($statusCode == Response::HTTP_BAD_REQUEST){
+                    throw new \Exception('Error: API returns a BAD REQUEST.');
+                }elseif($statusCode == Response::HTTP_UNAUTHORIZED){
+                    throw new \Exception('Error: API returns a UNAUTHORIZED.');
+                }elseif($statusCode == Response::HTTP_INTERNAL_SERVER_ERROR){
+                    throw new \Exception('Error: API returns aN INTERNAL SERVER ERROR.');
                 }
 
-                throw new \Exception('Error: API returns an error code.');
+                throw new \Exception('Error: API returns an other error code.');
             }
 
             throw new \Exception('Error: Not allowed method for API.');
