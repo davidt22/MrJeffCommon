@@ -42,6 +42,7 @@ class AuthorizationAPI
 
             if($responseAPI->error == false){
                 $userAPI = new UserAPI();
+                $userAPI->setName($responseAPI->user->name);
                 $userAPI->setEmail($responseAPI->user->email);
                 $userAPI->setPassword($password);
                 $userAPI->setToken($responseAPI->token);

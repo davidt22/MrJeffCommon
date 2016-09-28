@@ -143,7 +143,7 @@ class ProductOperationsAPI
         try{
             $methodUrl = self::METHOD_PRODUCT_DELETE;
             $data = array(
-                'idproduct' => $productAPI->getIdProduct()
+                'idproduct' => $productAPI->getId()
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $methodUrl, $data);
 

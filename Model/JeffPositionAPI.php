@@ -7,7 +7,7 @@ namespace MrJeff\CommonBundle\Model;
 class JeffPositionAPI
 {
     /** @var integer $id */
-    private $idJeffPosition;
+    private $id;
 
     /** @var string $latitude */
     private $latitude;
@@ -24,17 +24,17 @@ class JeffPositionAPI
     /**
      * @return int
      */
-    public function getIdJeffPosition()
+    public function getId()
     {
-        return $this->idJeffPosition;
+        return $this->id;
     }
 
     /**
-     * @param int $idJeffPosition
+     * @param int $id
      */
-    public function setIdJeffPosition($idJeffPosition)
+    public function setId($id)
     {
-        $this->idJeffPosition = $idJeffPosition;
+        $this->id = $id;
     }
 
     /**

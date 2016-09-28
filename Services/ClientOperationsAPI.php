@@ -2,8 +2,7 @@
 
 namespace MrJeff\CommonBundle\Services;
 
-use MrJeff\CommonBundle\Model\AddressAPI;
-use MrJeff\CommonBundle\Model\UserAPI;
+use MrJeff\CommonBundle\Model\ClientAPI;
 use Symfony\Component\HttpFoundation\Request;
 
 class ClientOperationsAPI
@@ -46,12 +45,16 @@ class ClientOperationsAPI
                 if($responseAPI->isEmpty == false){
 
                     foreach ($responseAPI->data as $client){
-                        $userAPI = new UserAPI();
+                        $userAPI = new ClientAPI();
                         $userAPI->setId($client->id);
                         $userAPI->setName($client->name);
                         $userAPI->setLastname($client->lastname);
                         $userAPI->setEmail($client->email);
                         $userAPI->setDeleted($client->deleted);
+                        $userAPI->setIdWoocommerce($client->idWoocommerce);
+                        $userAPI->setIdOpenBravo($client->idOpenBravo);
+                        $userAPI->setCreationDated($client->creationDate);
+                        $userAPI->setUpdateDate($client->updateDate);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -73,7 +76,7 @@ class ClientOperationsAPI
     }
 
     /**
-     * @param array $users //Deberia ser un array de objetos UserAPI ¿?
+     * @param array $users //Deberia ser un array de objetos ClientAPI ¿?
      *
      * @return bool
      * @throws \Exception
@@ -93,12 +96,16 @@ class ClientOperationsAPI
                 if($responseAPI->isEmpty == false){
 
                     foreach ($responseAPI->data as $client){
-                        $userAPI = new UserAPI();
+                        $userAPI = new ClientAPI();
                         $userAPI->setId($client->id);
                         $userAPI->setName($client->name);
                         $userAPI->setLastname($client->lastname);
                         $userAPI->setEmail($client->email);
                         $userAPI->setDeleted($client->deleted);
+                        $userAPI->setIdWoocommerce($client->idWoocommerce);
+                        $userAPI->setIdOpenBravo($client->idOpenBravo);
+                        $userAPI->setCreationDated($client->creationDate);
+                        $userAPI->setUpdateDate($client->updateDate);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -140,12 +147,16 @@ class ClientOperationsAPI
                 if($responseAPI->isEmpty == false){
 
                     foreach ($responseAPI->data as $client){
-                        $userAPI = new UserAPI();
+                        $userAPI = new ClientAPI();
                         $userAPI->setId($client->id);
                         $userAPI->setName($client->name);
                         $userAPI->setLastname($client->lastname);
                         $userAPI->setEmail($client->email);
                         $userAPI->setDeleted($client->deleted);
+                        $userAPI->setIdWoocommerce($client->idWoocommerce);
+                        $userAPI->setIdOpenBravo($client->idOpenBravo);
+                        $userAPI->setCreationDated($client->creationDate);
+                        $userAPI->setUpdateDate($client->updateDate);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -184,12 +195,16 @@ class ClientOperationsAPI
             if($responseAPI->codeResult == 0){
                 $client = $responseAPI->client;
 
-                $userAPI = new UserAPI();
+                $userAPI = new ClientAPI();
                 $userAPI->setId($client->id);
                 $userAPI->setName($client->name);
                 $userAPI->setLastname($client->lastname);
                 $userAPI->setEmail($client->email);
                 $userAPI->setDeleted($client->deleted);
+                $userAPI->setIdWoocommerce($client->idWoocommerce);
+                $userAPI->setIdOpenBravo($client->idOpenBravo);
+                $userAPI->setCreationDated($client->creationDate);
+                $userAPI->setUpdateDate($client->updateDate);
 
                 foreach($client->addresses as $address){
                     $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);

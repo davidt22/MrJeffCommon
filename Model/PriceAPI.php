@@ -6,8 +6,8 @@ namespace MrJeff\CommonBundle\Model;
 
 class PriceAPI
 {
-    /** @var integer $idPrice */
-    private $idPrice;
+    /** @var integer $id */
+    private $id;
 
     /** @var double $price */
     private $price;
@@ -30,17 +30,17 @@ class PriceAPI
     /**
      * @return int
      */
-    public function getIdPrice()
+    public function getId()
     {
-        return $this->idPrice;
+        return $this->id;
     }
 
     /**
-     * @param int $idPrice
+     * @param int $id
      */
-    public function setIdPrice($idPrice)
+    public function setId($id)
     {
-        $this->idPrice = $idPrice;
+        $this->id = $id;
     }
 
     /**

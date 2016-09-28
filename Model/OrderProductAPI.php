@@ -6,8 +6,8 @@ namespace MrJeff\CommonBundle\Model;
 
 class OrderProductAPI
 {
-    /** @var integer $idOrderProduct */
-    private $idOrderProduct;
+    /** @var integer $id */
+    private $id;
 
     /** @var ProductAPI $product */
     private $product;
@@ -30,17 +30,17 @@ class OrderProductAPI
     /**
      * @return int
      */
-    public function getIdOrderProduct()
+    public function getId()
     {
-        return $this->idOrderProduct;
+        return $this->id;
     }
 
     /**
-     * @param int $idOrderProduct
+     * @param int $id
      */
-    public function setIdOrderProduct($idOrderProduct)
+    public function setId($id)
     {
-        $this->idOrderProduct = $idOrderProduct;
+        $this->id = $id;
     }
 
     /**

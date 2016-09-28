@@ -6,8 +6,8 @@ namespace MrJeff\CommonBundle\Model;
 
 class CategoryAPI
 {
-    /** @var integer $idCatgeory */
-    private $idCatgeory;
+    /** @var integer $id */
+    private $id;
 
     /** @var string $name */
     private $name;
@@ -15,17 +15,17 @@ class CategoryAPI
     /**
      * @return int
      */
-    public function getIdCatgeory()
+    public function getId()
     {
-        return $this->idCatgeory;
+        return $this->id;
     }
 
     /**
-     * @param int $idCatgeory
+     * @param int $id
      */
-    public function setIdCatgeory($idCatgeory)
+    public function setId($id)
     {
-        $this->idCatgeory = $idCatgeory;
+        $this->id = $id;
     }
 
     /**

@@ -129,7 +129,7 @@ class OrderOperationsAPI
         try{
             $methodUrl = self::METHOD_ORDER_DELETE;
             $data = array(
-                'idOrder' => $orderAPI->getIdOrder()
+                'idOrder' => $orderAPI->getId()
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $methodUrl, $data);
 
@@ -237,7 +237,7 @@ class OrderOperationsAPI
         try{
             $methodUrl = self::METHOD_ORDER_POSTAL_CODE;
             $data = array(
-                'order-id' => $orderAPI->getIdOrder()
+                'order-id' => $orderAPI->getId()
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $methodUrl, $data);
 

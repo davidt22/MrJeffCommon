@@ -18,17 +18,23 @@ class ClientAPI
     /** @var string $email */
     private $email;
 
-    /** @var string $password */
-    private $password;
+    /** @var ArrayCollection $addresses */
+    private $addresses;
 
     /** @var boolean $deleted */
     private $deleted;
 
-    /** @var ArrayCollection $addresses */
-    private $addresses;
+    /** @var int $idWoocommerce */
+    private $idWoocommerce;
 
-    /** @var string $token */
-    private $token;
+    /** @var string $idOpenBravo */
+    private $idOpenBravo;
+
+    /** @var \DateTime $creationDated */
+    private $creationDated;
+
+    /** @var \DateTime $updateDate */
+    private $updateDate;
 
     /**
      * User constructor.
@@ -36,7 +42,6 @@ class ClientAPI
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
-        $this->token = null;
     }
 
     /**
@@ -104,22 +109,6 @@ class ClientAPI
     }
 
     /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
      * @return boolean
      */
     public function isDeleted()
@@ -168,18 +157,66 @@ class ClientAPI
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getToken()
+    public function getIdWoocommerce()
     {
-        return $this->token;
+        return $this->idWoocommerce;
     }
 
     /**
-     * @param string $token
+     * @param int $idWoocommerce
      */
-    public function setToken($token)
+    public function setIdWoocommerce($idWoocommerce)
     {
-        $this->token = $token;
+        $this->idWoocommerce = $idWoocommerce;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdOpenBravo()
+    {
+        return $this->idOpenBravo;
+    }
+
+    /**
+     * @param string $idOpenBravo
+     */
+    public function setIdOpenBravo($idOpenBravo)
+    {
+        $this->idOpenBravo = $idOpenBravo;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDated()
+    {
+        return $this->creationDated;
+    }
+
+    /**
+     * @param \DateTime $creationDated
+     */
+    public function setCreationDated($creationDated)
+    {
+        $this->creationDated = $creationDated;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * @param \DateTime $updateDate
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
     }
 }

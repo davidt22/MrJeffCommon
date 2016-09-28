@@ -6,8 +6,8 @@ namespace MrJeff\CommonBundle\Model;
 
 class PaymentMethodAPI
 {
-    /** @var int $idPaymentMethod */
-    private $idPaymentMethod;
+    /** @var int $id */
+    private $id;
 
     /** @var string $name */
     private $name;
@@ -29,17 +29,17 @@ class PaymentMethodAPI
     /**
      * @return int
      */
-    public function getIdPaymentMethod()
+    public function getId()
     {
-        return $this->idPaymentMethod;
+        return $this->id;
     }
 
     /**
-     * @param int $idPaymentMethod
+     * @param int $id
      */
-    public function setIdPaymentMethod($idPaymentMethod)
+    public function setId($id)
     {
-        $this->idPaymentMethod = $idPaymentMethod;
+        $this->id = $id;
     }
 
     /**

@@ -6,8 +6,8 @@ namespace MrJeff\CommonBundle\Model;
 
 class DescriptionAPI
 {
-    /** @var integer $idDescription */
-    private $idDescription;
+    /** @var integer $id */
+    private $id;
 
     /** @var  string $name */
     private $name;
@@ -21,17 +21,17 @@ class DescriptionAPI
     /**
      * @return int
      */
-    public function getIdDescription()
+    public function getId()
     {
-        return $this->idDescription;
+        return $this->id;
     }
 
     /**
-     * @param int $idDescription
+     * @param int $id
      */
-    public function setIdDescription($idDescription)
+    public function setId($id)
     {
-        $this->idDescription = $idDescription;
+        $this->id = $id;
     }
 
     /**

@@ -8,8 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class OrderAPI
 {
-    /** @var int $idOrder */
-    private $idOrder;
+    /** @var int $id */
+    private $id;
 
     /** @var UserAPI $client */
     private $client;
@@ -120,17 +120,17 @@ class OrderAPI
     /**
      * @return int
      */
-    public function getIdOrder()
+    public function getId()
     {
-        return $this->idOrder;
+        return $this->id;
     }
 
     /**
-     * @param int $idOrder
+     * @param int $id
      */
-    public function setIdOrder($idOrder)
+    public function setId($id)
     {
-        $this->idOrder = $idOrder;
+        $this->id = $id;
     }
 
     /**

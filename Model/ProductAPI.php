@@ -8,8 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ProductAPI
 {
-    /** @var integer $idProduct */
-    private $idProduct;
+    /** @var integer $id */
+    private $id;
 
     /** @var string $reference */
     private $reference;
@@ -108,17 +108,17 @@ class ProductAPI
     /**
      * @return int
      */
-    public function getIdProduct()
+    public function getId()
     {
-        return $this->idProduct;
+        return $this->id;
     }
 
     /**
-     * @param int $idProduct
+     * @param int $id
      */
-    public function setIdProduct($idProduct)
+    public function setId($id)
     {
-        $this->idProduct = $idProduct;
+        $this->id = $id;
     }
 
     /**

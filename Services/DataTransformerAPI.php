@@ -6,6 +6,7 @@ namespace MrJeff\CommonBundle\Services;
 
 use MrJeff\CommonBundle\Model\AddressAPI;
 use MrJeff\CommonBundle\Model\CategoryAPI;
+use MrJeff\CommonBundle\Model\ClientAPI;
 use MrJeff\CommonBundle\Model\DescriptionAPI;
 use MrJeff\CommonBundle\Model\JeffAPI;
 use MrJeff\CommonBundle\Model\JeffPositionAPI;
@@ -17,7 +18,6 @@ use MrJeff\CommonBundle\Model\PriceAPI;
 use MrJeff\CommonBundle\Model\ProductAPI;
 use MrJeff\CommonBundle\Model\ReviewAPI;
 use MrJeff\CommonBundle\Model\StateOrderAPI;
-use MrJeff\CommonBundle\Model\UserAPI;
 use MrJeff\CommonBundle\Model\ValorationAPI;
 
 class DataTransformerAPI
@@ -30,7 +30,7 @@ class DataTransformerAPI
     public static function transformDescriptionDataToObject($description)
     {
         $descriptionAPI = new DescriptionAPI();
-        $descriptionAPI->setIdDescription($description->idProductDescription);
+        $descriptionAPI->setId($description->idProductDescription);
         $descriptionAPI->setName($description->name);
         $descriptionAPI->setDescription($description->description);
 
@@ -50,7 +50,7 @@ class DataTransformerAPI
     public static function transformCategoryDataToObject(\stdClass $category)
     {
         $categoryAPI = new CategoryAPI();
-        $categoryAPI->setIdCatgeory($category->idCategory);
+        $categoryAPI->setId($category->idCategory);
         $categoryAPI->setName($category->name);
 
         return $categoryAPI;
@@ -64,7 +64,7 @@ class DataTransformerAPI
     public static function transformPaymentMethodDataToObject(\stdClass $paymentMethodOrder)
     {
         $paymentMethodAPI = new PaymentMethodAPI();
-        $paymentMethodAPI->setIdPaymentMethod($paymentMethodOrder->idPaymentMethod);
+        $paymentMethodAPI->setId($paymentMethodOrder->idPaymentMethod);
         $paymentMethodAPI->setName($paymentMethodOrder->name);
         $paymentMethodAPI->setDescription($paymentMethodOrder->description);
         $paymentMethodAPI->setDeleted($paymentMethodOrder->deleted);
@@ -127,7 +127,7 @@ class DataTransformerAPI
     public static function transformPriceDataToObject(\stdClass $price)
     {
         $priceAPI = new PriceAPI();
-        $priceAPI->setIdPrice($price->idPrice);
+        $priceAPI->setId($price->idPrice);
         $priceAPI->setPrice($price->price);
         $priceAPI->setCodeBadge($price->codeBadge);
         $priceAPI->setPercent($price->percent);
@@ -141,16 +141,20 @@ class DataTransformerAPI
     /**
      * @param \stdClass $clientOrder
      *
-     * @return UserAPI
+     * @return ClientAPI
      */
     public static function transformClientDataToObject(\stdClass $clientOrder)
     {
-        $clientAPI = new UserAPI();
+        $clientAPI = new ClientAPI();
         $clientAPI->setId($clientOrder->idClient);
         $clientAPI->setName($clientOrder->name);
         $clientAPI->setLastname($clientOrder->lastname);
         $clientAPI->setEmail($clientOrder->email);
         $clientAPI->setDeleted($clientOrder->deleted);
+        $clientAPI->setIdWoocommerce($clientOrder->idWoocommerce);
+        $clientAPI->setIdOpenBravo($clientOrder->idOpenBravo);
+        $clientAPI->setCreationDated($clientOrder->creationDate);
+        $clientAPI->setUpdateDate($clientOrder->updateDate);
 
         return $clientAPI;
     }
@@ -163,7 +167,7 @@ class DataTransformerAPI
     public static function transformProductDataToObject(\stdClass $product)
     {
         $productAPI = new ProductAPI();
-        $productAPI->setIdProduct($product->idProduct);
+        $productAPI->setId($product->idProduct);
         $productAPI->setReference($product->reference);
         $productAPI->setAppVisible($product->appVisible);
         $productAPI->setActive($product->active);
@@ -180,7 +184,7 @@ class DataTransformerAPI
     public static function transformJeffPositionDataToObject(\stdClass $position)
     {
         $jeffPosition = new JeffPositionAPI();
-        $jeffPosition->setIdJeffPosition($position->idJeffPosition);
+        $jeffPosition->setId($position->idJeffPosition);
         $jeffPosition->setLatitude($position->latitude);
         $jeffPosition->setLongitude($position->longitude);
         $jeffPosition->setCurDate($position->curDate);
@@ -214,7 +218,7 @@ class DataTransformerAPI
     public static function transformOrderDataToObject(\stdClass $order)
     {
         $orderAPI = new OrderAPI();
-        $orderAPI->setIdOrder($order->idOrder);
+        $orderAPI->setId($order->idOrder);
 
         $clientOrder = $order->client;
         $clientAPI = self::transformClientDataToObject($clientOrder);
@@ -264,7 +268,7 @@ class DataTransformerAPI
 
         foreach ($order->orderProducts as $orderProduct) {
             $orderProductAPI = new OrderProductAPI();
-            $orderProductAPI->setIdOrderProduct($orderProduct->idProduct);
+            $orderProductAPI->setId($orderProduct->idProduct);
 
             $product = $orderProduct->product;
             $productAPI = self::transformProductDataToObject($product);
