@@ -153,7 +153,7 @@ class DataTransformerAPI
         $clientAPI->setDeleted($clientOrder->deleted);
         $clientAPI->setIdWoocommerce($clientOrder->idWoocommerce);
         $clientAPI->setIdOpenBravo($clientOrder->idOpenBravo);
-        $clientAPI->setCreationDated($clientOrder->creationDate);
+        $clientAPI->setCreationDate($clientOrder->creationDate);
         $clientAPI->setUpdateDate($clientOrder->updateDate);
 
         return $clientAPI;

@@ -30,8 +30,8 @@ class ClientAPI
     /** @var string $idOpenBravo */
     private $idOpenBravo;
 
-    /** @var \DateTime $creationDated */
-    private $creationDated;
+    /** @var \DateTime $creationDate */
+    private $creationDate;
 
     /** @var \DateTime $updateDate */
     private $updateDate;
@@ -191,17 +191,17 @@ class ClientAPI
     /**
      * @return \DateTime
      */
-    public function getCreationDated()
+    public function getCreationDate()
     {
-        return $this->creationDated;
+        return $this->creationDate;
     }
 
     /**
-     * @param \DateTime $creationDated
+     * @param \DateTime $creationDate
      */
-    public function setCreationDated($creationDated)
+    public function setCreationDate($creationDate)
     {
-        $this->creationDated = $creationDated;
+        $this->creationDate = $creationDate;
     }
 
     /**

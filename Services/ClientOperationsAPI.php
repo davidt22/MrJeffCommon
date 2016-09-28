@@ -53,7 +53,7 @@ class ClientOperationsAPI
                         $userAPI->setDeleted($client->deleted);
                         $userAPI->setIdWoocommerce($client->idWoocommerce);
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
-                        $userAPI->setCreationDated($client->creationDate);
+                        $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
 
                         foreach($client->addresses as $address){
@@ -104,7 +104,7 @@ class ClientOperationsAPI
                         $userAPI->setDeleted($client->deleted);
                         $userAPI->setIdWoocommerce($client->idWoocommerce);
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
-                        $userAPI->setCreationDated($client->creationDate);
+                        $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
 
                         foreach($client->addresses as $address){
@@ -155,7 +155,7 @@ class ClientOperationsAPI
                         $userAPI->setDeleted($client->deleted);
                         $userAPI->setIdWoocommerce($client->idWoocommerce);
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
-                        $userAPI->setCreationDated($client->creationDate);
+                        $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
 
                         foreach($client->addresses as $address){
@@ -203,7 +203,7 @@ class ClientOperationsAPI
                 $userAPI->setDeleted($client->deleted);
                 $userAPI->setIdWoocommerce($client->idWoocommerce);
                 $userAPI->setIdOpenBravo($client->idOpenBravo);
-                $userAPI->setCreationDated($client->creationDate);
+                $userAPI->setCreationDate($client->creationDate);
                 $userAPI->setUpdateDate($client->updateDate);
 
                 foreach($client->addresses as $address){
