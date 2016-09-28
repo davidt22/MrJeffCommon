@@ -59,6 +59,9 @@ class RequestManagerAPI
 
             switch ($methodType) {
                 case Request::METHOD_GET:
+                    $options = array(
+                        'query' => $bodyData
+                    );
                     $response = $client->get($uri, $options);
                     break;
 

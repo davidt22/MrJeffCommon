@@ -19,6 +19,6 @@ services:
     mrjeff.product_operations_api:
         class: MrJeff\CommonBundle\Services\ProductOperationsAPI
         arguments: ['@mrjeff.request_manager_api']
-    mrjeff.user_operations_api:
-        class: MrJeff\CommonBundle\Services\UserOperationsAPI
+    mrjeff.client_operations_api:
+        class: MrJeff\CommonBundle\Services\ClientOperationsAPI
         arguments: ['@mrjeff.request_manager_api']

@@ -6,72 +6,44 @@ namespace MrJeff\CommonBundle\Model;
 
 class AddressAPI
 {
-    /** @var int $idAddress */
-    private $idAddress;
-
-    /** @var string $name */
-    private $name;
+    /** @var int $id */
+    private $id;
 
     /** @var string $postalCode */
     private $postalCode;
 
-    /** @var string $phone */
-    private $phone;
-
-    /** @var string $zone */
-    private $zone;
-
     /** @var string $city */
     private $city;
-
-    /** @var string $state */
-    private $state;
 
     /** @var string $country */
     private $country;
 
-    /** @var boolean $isTimeTableOffice */
-    private $isTimeTableOffice;
+    /** @var int $idOpenBravo */
+    private $idOpenBravo;
 
-    /**
-     * AddressAPI constructor.
-     */
-    public function __construct()
-    {
+    /** @var string $address */
+    private $address;
 
-    }
+    /** @var \DateTime $creationDate */
+    private $creationDate;
 
+    /** @var \DateTime $updateDate */
+    private $updateDate;
 
     /**
      * @return int
      */
-    public function getIdAddress()
+    public function getId()
     {
-        return $this->idAddress;
+        return $this->id;
     }
 
     /**
-     * @param int $idAddress
+     * @param int $id
      */
-    public function setIdAddress($idAddress)
+    public function setId($id)
     {
-        $this->idAddress = $idAddress;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
@@ -93,38 +65,6 @@ class AddressAPI
     /**
      * @return string
      */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getZone()
-    {
-        return $this->zone;
-    }
-
-    /**
-     * @param string $zone
-     */
-    public function setZone($zone)
-    {
-        $this->zone = $zone;
-    }
-
-    /**
-     * @return string
-     */
     public function getCity()
     {
         return $this->city;
@@ -136,22 +76,6 @@ class AddressAPI
     public function setCity($city)
     {
         $this->city = $city;
-    }
-
-    /**
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * @param string $state
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
     }
 
     /**
@@ -171,19 +95,66 @@ class AddressAPI
     }
 
     /**
-     * @return boolean
+     * @return int
      */
-    public function isIsTimeTableOffice()
+    public function getIdOpenBravo()
     {
-        return $this->isTimeTableOffice;
+        return $this->idOpenBravo;
     }
 
     /**
-     * @param boolean $isTimeTableOffice
+     * @param int $idOpenBravo
      */
-    public function setIsTimeTableOffice($isTimeTableOffice)
+    public function setIdOpenBravo($idOpenBravo)
     {
-        $this->isTimeTableOffice = $isTimeTableOffice;
+        $this->idOpenBravo = $idOpenBravo;
     }
 
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \DateTime $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * @param \DateTime $updateDate
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+    }
 }

@@ -6,13 +6,13 @@ use MrJeff\CommonBundle\Model\AddressAPI;
 use MrJeff\CommonBundle\Model\UserAPI;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserOperationsAPI
+class ClientOperationsAPI
 {
-    const METHOD_USER_FIND = 'mrjeff/user/find';
-    const METHOD_USER_ADD = 'mrjeff/user/add';
-    const METHOD_USER_UPDATE = 'mrjeff/user/update';
-    const METHOD_USER_DELETE = 'mrjeff/user/delete';
-    const METHOD_USER_ADDRESS_DELETE = 'mrjeff/location/delete';
+    const METHOD_CLIENT_FIND = 'mrjeff/user/find';
+    const METHOD_CLIENT_ADD = 'mrjeff/user/add';
+    const METHOD_CLIENT_UPDATE = 'mrjeff/user/update';
+    const METHOD_CLIENT_DELETE = 'mrjeff/user/delete';
+    const METHOD_CLIENT_ADDRESS_DELETE = 'mrjeff/location/delete';
 
     /** @var RequestManagerAPI $requestManagerAPI */
     private $requestManagerAPI;
@@ -29,40 +29,32 @@ class UserOperationsAPI
 
     /**
      * @param array $filterFields
+     * @param string $token
      *
-     * @return array|bool
+     * @return array
      * @throws \Exception
      */
-    public function findUsers($filterFields = array('key' => 'value'))
+    public function findClients($filterFields = array('key' => 'value'), $token = '')
     {
         try{
-            $uri = self::METHOD_USER_ADD;
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $uri, $filterFields);
+            $uri = self::METHOD_CLIENT_FIND;
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $uri, $filterFields, $token);
 
-            if($responseAPI->haveError == false){
+            if($responseAPI->codeResult == 0){
                 $users = array();
 
                 if($responseAPI->isEmpty == false){
 
-                    foreach ($responseAPI->clients as $client){
+                    foreach ($responseAPI->data as $client){
                         $userAPI = new UserAPI();
-                        $userAPI->setIdClient($client->idClient);
+                        $userAPI->setId($client->id);
                         $userAPI->setName($client->name);
                         $userAPI->setLastname($client->lastname);
                         $userAPI->setEmail($client->email);
                         $userAPI->setDeleted($client->deleted);
 
                         foreach($client->addresses as $address){
-                            $addressAPI = new AddressAPI();
-                            $addressAPI->setIdAddress($address->idAddress);
-                            $addressAPI->setName($address->name);
-                            $addressAPI->setPostalCode($address->postalCode);
-                            $addressAPI->setPhone($address->phone);
-                            $addressAPI->setZone($address->zone);
-                            $addressAPI->setCity($address->city);
-                            $addressAPI->setState($address->state);
-                            $addressAPI->setCountry($address->country);
-                            $addressAPI->setIsTimeTableOffice($address->isTimeTableOffice);
+                            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
 
                             $userAPI->addAddress($addressAPI);
                         }
@@ -86,39 +78,30 @@ class UserOperationsAPI
      * @return bool
      * @throws \Exception
      */
-    public function addUsers($users = array('key' => 'value'))
+    public function addClients($users = array('key' => 'value'))
     {
         try{
-            $uri = self::METHOD_USER_ADD;
+            $uri = self::METHOD_CLIENT_ADD;
             $data = array(
                 'client' => $users
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $uri, $data);
 
-            if($responseAPI->haveError == false){
+            if($responseAPI->codeResult == 0){
                 $users = array();
 
                 if($responseAPI->isEmpty == false){
 
-                    foreach ($responseAPI->clients as $client){
+                    foreach ($responseAPI->data as $client){
                         $userAPI = new UserAPI();
-                        $userAPI->setIdClient($client->idClient);
+                        $userAPI->setId($client->id);
                         $userAPI->setName($client->name);
                         $userAPI->setLastname($client->lastname);
                         $userAPI->setEmail($client->email);
                         $userAPI->setDeleted($client->deleted);
 
                         foreach($client->addresses as $address){
-                            $addressAPI = new AddressAPI();
-                            $addressAPI->setIdAddress($address->idAddress);
-                            $addressAPI->setName($address->name);
-                            $addressAPI->setPostalCode($address->postalCode);
-                            $addressAPI->setPhone($address->phone);
-                            $addressAPI->setZone($address->zone);
-                            $addressAPI->setCity($address->city);
-                            $addressAPI->setState($address->state);
-                            $addressAPI->setCountry($address->country);
-                            $addressAPI->setIsTimeTableOffice($address->isTimeTableOffice);
+                            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
 
                             $userAPI->addAddress($addressAPI);
                         }
@@ -142,39 +125,30 @@ class UserOperationsAPI
      * @return array
      * @throws \Exception
      */
-    public function updateUser($users = array('key' => 'value'))
+    public function updateClient($users = array('key' => 'value'))
     {
         try{
-            $uri = self::METHOD_USER_UPDATE;
+            $uri = self::METHOD_CLIENT_UPDATE;
             $data = array(
                 'client' => $users
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_PUT, $uri, $data);
 
-            if($responseAPI->haveError == false){
+            if($responseAPI->codeResult == 0){
                 $users = array();
 
                 if($responseAPI->isEmpty == false){
 
-                    foreach ($responseAPI->clients as $client){
+                    foreach ($responseAPI->data as $client){
                         $userAPI = new UserAPI();
-                        $userAPI->setIdClient($client->idClient);
+                        $userAPI->setId($client->id);
                         $userAPI->setName($client->name);
                         $userAPI->setLastname($client->lastname);
                         $userAPI->setEmail($client->email);
                         $userAPI->setDeleted($client->deleted);
 
                         foreach($client->addresses as $address){
-                            $addressAPI = new AddressAPI();
-                            $addressAPI->setIdAddress($address->idAddress);
-                            $addressAPI->setName($address->name);
-                            $addressAPI->setPostalCode($address->postalCode);
-                            $addressAPI->setPhone($address->phone);
-                            $addressAPI->setZone($address->zone);
-                            $addressAPI->setCity($address->city);
-                            $addressAPI->setState($address->state);
-                            $addressAPI->setCountry($address->country);
-                            $addressAPI->setIsTimeTableOffice($address->isTimeTableOffice);
+                            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
 
                             $userAPI->addAddress($addressAPI);
                         }
@@ -198,36 +172,27 @@ class UserOperationsAPI
      * @return array
      * @throws \Exception
      */
-    public function deleteUser($userId)
+    public function deleteClient($userId)
     {
         try{
-            $uri = self::METHOD_USER_DELETE;
+            $uri = self::METHOD_CLIENT_DELETE;
             $data = array(
-                'idClient' => $userId
+                'id' => $userId
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $uri, $data);
 
-            if($responseAPI->haveError == false){
+            if($responseAPI->codeResult == 0){
                 $client = $responseAPI->client;
 
                 $userAPI = new UserAPI();
-                $userAPI->setIdClient($client->idClient);
+                $userAPI->setId($client->id);
                 $userAPI->setName($client->name);
                 $userAPI->setLastname($client->lastname);
                 $userAPI->setEmail($client->email);
                 $userAPI->setDeleted($client->deleted);
 
                 foreach($client->addresses as $address){
-                    $addressAPI = new AddressAPI();
-                    $addressAPI->setIdAddress($address->idAddress);
-                    $addressAPI->setName($address->name);
-                    $addressAPI->setPostalCode($address->postalCode);
-                    $addressAPI->setPhone($address->phone);
-                    $addressAPI->setZone($address->zone);
-                    $addressAPI->setCity($address->city);
-                    $addressAPI->setState($address->state);
-                    $addressAPI->setCountry($address->country);
-                    $addressAPI->setIsTimeTableOffice($address->isTimeTableOffice);
+                    $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
 
                     $userAPI->addAddress($addressAPI);
                 }
@@ -247,16 +212,16 @@ class UserOperationsAPI
      * @return bool
      * @throws \Exception
      */
-    public function deleteUserAddress($addressId)
+    public function deleteClientAddress($addressId)
     {
         try{
-            $uri = self::METHOD_USER_ADDRESS_DELETE;
+            $uri = self::METHOD_CLIENT_ADDRESS_DELETE;
             $data = array(
                 'idAddress' => $addressId
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $uri, $data);
 
-            if($responseAPI->haveError == false){
+            if($responseAPI->codeResult == 0){
                 return true;
             }else{
                 throw new \Exception('Error: ' . $responseAPI->messageError);
