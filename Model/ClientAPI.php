@@ -1,12 +1,10 @@
 <?php
 
-
 namespace MrJeff\CommonBundle\Model;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class UserAPI
+class ClientAPI
 {
     /** @var int $id */
     private $id;

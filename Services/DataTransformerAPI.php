@@ -57,27 +57,6 @@ class DataTransformerAPI
     }
 
     /**
-     * @param \stdClass $address
-     *
-     * @return AddressAPI
-     */
-    public static function transformAddressDataToObject(\stdClass $address)
-    {
-        $addressAPI = new AddressAPI();
-        $addressAPI->setIdAddress($address->idAddress);
-        $addressAPI->setName($address->name);
-        $addressAPI->setPostalCode($address->postalCode);
-        $addressAPI->setPhone($address->phone);
-        $addressAPI->setZone($address->zone);
-        $addressAPI->setCity($address->city);
-        $addressAPI->setState($address->state);
-        $addressAPI->setCountry($address->country);
-        $addressAPI->setIsTimeTableOffice($address->isTimeTableOffice);
-
-        return $addressAPI;
-    }
-
-    /**
      * @param \stdClass $paymentMethodOrder
      *
      * @return PaymentMethodAPI
@@ -167,7 +146,7 @@ class DataTransformerAPI
     public static function transformClientDataToObject(\stdClass $clientOrder)
     {
         $clientAPI = new UserAPI();
-        $clientAPI->setIdClient($clientOrder->idClient);
+        $clientAPI->setId($clientOrder->idClient);
         $clientAPI->setName($clientOrder->name);
         $clientAPI->setLastname($clientOrder->lastname);
         $clientAPI->setEmail($clientOrder->email);
@@ -338,5 +317,25 @@ class DataTransformerAPI
         $valorationAPI->setNotes($valoration->notes);
 
         return $valorationAPI;
+    }
+
+    /**
+     * @param \stdClass $address
+     *
+     * @return AddressAPI
+     */
+    public static function transformAddressDataToObject(\stdClass $address)
+    {
+        $addressAPI = new AddressAPI();
+        $addressAPI->setId($address->id);
+        $addressAPI->setPostalCode($address->postalCode);
+        $addressAPI->setCity($address->city);
+        $addressAPI->setCountry($address->country);
+        $addressAPI->setIdOpenBravo($address->idOpenBravo);
+        $addressAPI->setAddress($address->address);
+        $addressAPI->setCreationDate($address->creationDate);
+        $addressAPI->setUpdateDate($address->updateDate);
+
+        return $addressAPI;
     }
 }
