@@ -36,6 +36,9 @@ class ClientAPI
     /** @var \DateTime $updateDate */
     private $updateDate;
 
+    /** @var string $password */
+    private $password;
+
     /**
      * User constructor.
      */
@@ -218,5 +221,21 @@ class ClientAPI
     public function setUpdateDate($updateDate)
     {
         $this->updateDate = $updateDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 }

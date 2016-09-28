@@ -97,11 +97,11 @@ class RequestManagerAPI
                     //                    return false;
                     //                }
                 }elseif($statusCode == Response::HTTP_BAD_REQUEST){
-                    throw new \Exception('Error: API returns a BAD REQUEST.');
+                    throw new \Exception('Error: API returns BAD REQUEST.');
                 }elseif($statusCode == Response::HTTP_UNAUTHORIZED){
-                    throw new \Exception('Error: API returns a UNAUTHORIZED.');
+                    throw new \Exception('Error: API returns UNAUTHORIZED.');
                 }elseif($statusCode == Response::HTTP_INTERNAL_SERVER_ERROR){
-                    throw new \Exception('Error: API returns aN INTERNAL SERVER ERROR.');
+                    throw new \Exception('Error: API returns INTERNAL SERVER ERROR.');
                 }
 
                 throw new \Exception('Error: API returns an other error code.');

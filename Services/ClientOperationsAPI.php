@@ -55,6 +55,7 @@ class ClientOperationsAPI
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
                         $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
+                        $userAPI->setPassword($client->password);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -106,6 +107,7 @@ class ClientOperationsAPI
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
                         $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
+                        $userAPI->setPassword($client->password);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -157,6 +159,7 @@ class ClientOperationsAPI
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
                         $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
+                        $userAPI->setPassword($client->password);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -205,6 +208,7 @@ class ClientOperationsAPI
                 $userAPI->setIdOpenBravo($client->idOpenBravo);
                 $userAPI->setCreationDate($client->creationDate);
                 $userAPI->setUpdateDate($client->updateDate);
+                $userAPI->setPassword($client->password);
 
                 foreach($client->addresses as $address){
                     $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);

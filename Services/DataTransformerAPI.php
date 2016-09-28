@@ -155,6 +155,7 @@ class DataTransformerAPI
         $clientAPI->setIdOpenBravo($clientOrder->idOpenBravo);
         $clientAPI->setCreationDate($clientOrder->creationDate);
         $clientAPI->setUpdateDate($clientOrder->updateDate);
+        $clientAPI->setPassword($clientOrder->password);
 
         return $clientAPI;
     }
