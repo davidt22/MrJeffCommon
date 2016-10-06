@@ -4,7 +4,7 @@ namespace MrJeff\CommonBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class ClientAPI
+class ClientAPI implements \JsonSerializable
 {
     /** @var int $id */
     private $id;
@@ -33,11 +33,14 @@ class ClientAPI
     /** @var \DateTime $creationDate */
     private $creationDate;
 
+    /** @var string $creationUser */
+    private $creationUser;
+
     /** @var \DateTime $updateDate */
     private $updateDate;
 
-    /** @var string $password */
-    private $password;
+    /** @var string $updateUser */
+    private $updateUser;
 
     /**
      * User constructor.
@@ -226,16 +229,57 @@ class ClientAPI
     /**
      * @return string
      */
-    public function getPassword()
+    public function getUpdateUser()
     {
-        return $this->password;
+        return $this->updateUser;
     }
 
     /**
-     * @param string $password
+     * @param string $updateUser
      */
-    public function setPassword($password)
+    public function setUpdateUser($updateUser)
     {
-        $this->password = $password;
+        $this->updateUser = $updateUser;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreationUser()
+    {
+        return $this->creationUser;
+    }
+
+    /**
+     * @param string $creationUser
+     */
+    public function setCreationUser($creationUser)
+    {
+        $this->creationUser = $creationUser;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'addresses' => $this->addresses->toArray(),
+            'deleted' => $this->deleted,
+            'idWoocommerce' => $this->idWoocommerce,
+            'idOpenBravo' => $this->idOpenBravo,
+            'creationDate' => $this->creationDate,
+            'creationUser' => $this->creationUser,
+            'updateDate' => $this->updateDate,
+            'updateUser' => $this->updateUser,
+        );
     }
 }

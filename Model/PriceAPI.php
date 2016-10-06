@@ -4,7 +4,7 @@
 namespace MrJeff\CommonBundle\Model;
 
 
-class PriceAPI
+class PriceAPI implements \JsonSerializable
 {
     /** @var integer $id */
     private $id;
@@ -137,5 +137,25 @@ class PriceAPI
     public function setPostalCode($postalCode)
     {
         $this->postalCode = $postalCode;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'price' => $this->price,
+            'codeBadge' => $this->codeBadge,
+            'percent' => $this->percent,
+            'country' => $this->country,
+            'city' => $this->city,
+            'postalCode' => $this->postalCode
+        );
     }
 }

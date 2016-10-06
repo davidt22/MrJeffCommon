@@ -7,11 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ClientOperationsAPI
 {
-    const METHOD_CLIENT_FIND = 'mrjeff/user/find';
-    const METHOD_CLIENT_ADD = 'mrjeff/user/add';
-    const METHOD_CLIENT_UPDATE = 'mrjeff/user/update';
-    const METHOD_CLIENT_DELETE = 'mrjeff/user/delete';
-    const METHOD_CLIENT_ADDRESS_DELETE = 'mrjeff/location/delete';
+    const METHOD_CLIENT_FIND = 'mrjeff/client/find';
+    const METHOD_CLIENT_ADD = 'mrjeff/client/add';
+    const METHOD_CLIENT_UPDATE = 'mrjeff/client/update';
+    const METHOD_CLIENT_DELETE = 'mrjeff/client/delete';
+    const METHOD_CLIENT_ADDRESS_DELETE = 'mrjeff/client/address/delete';
 
     /** @var RequestManagerAPI $requestManagerAPI */
     private $requestManagerAPI;
@@ -55,7 +55,7 @@ class ClientOperationsAPI
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
                         $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
-                        $userAPI->setPassword($client->password);
+                        $userAPI->setUpdateUser($client->updateUser);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -77,22 +77,21 @@ class ClientOperationsAPI
     }
 
     /**
-     * @param array $users //Deberia ser un array de objetos ClientAPI ¿?
+     * @param ClientAPI $clientAPI
+     * @param string $token
      *
-     * @return bool
+     * @return array|ClientAPI
      * @throws \Exception
      */
-    public function addClients($users = array('key' => 'value'))
+    public function addClient(ClientAPI $clientAPI, $token = '')
     {
         try{
             $uri = self::METHOD_CLIENT_ADD;
-            $data = array(
-                'client' => $users
-            );
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $uri, $data);
+            $data = json_encode($clientAPI);
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $uri, $data, $token);
 
             if($responseAPI->codeResult == 0){
-                $users = array();
+                $clientAPI = array();
 
                 if($responseAPI->isEmpty == false){
 
@@ -107,7 +106,7 @@ class ClientOperationsAPI
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
                         $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
-                        $userAPI->setPassword($client->password);
+                        $userAPI->setUpdateUser($client->updateUser);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -115,11 +114,11 @@ class ClientOperationsAPI
                             $userAPI->addAddress($addressAPI);
                         }
 
-                        array_push($users, $userAPI);
+                        array_push($clientAPI, $userAPI);
                     }
                 }
 
-                return $users;
+                return $clientAPI;
             }else{
                 throw new \Exception('Error: ' . $responseAPI->messageError);
             }
@@ -159,7 +158,7 @@ class ClientOperationsAPI
                         $userAPI->setIdOpenBravo($client->idOpenBravo);
                         $userAPI->setCreationDate($client->creationDate);
                         $userAPI->setUpdateDate($client->updateDate);
-                        $userAPI->setPassword($client->password);
+                        $userAPI->setUpdateUser($client->updateUser);
 
                         foreach($client->addresses as $address){
                             $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
@@ -208,7 +207,7 @@ class ClientOperationsAPI
                 $userAPI->setIdOpenBravo($client->idOpenBravo);
                 $userAPI->setCreationDate($client->creationDate);
                 $userAPI->setUpdateDate($client->updateDate);
-                $userAPI->setPassword($client->password);
+                $userAPI->setUpdateUser($client->updateUser);
 
                 foreach($client->addresses as $address){
                     $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);

@@ -11,6 +11,7 @@ use MrJeff\CommonBundle\Model\DescriptionAPI;
 use MrJeff\CommonBundle\Model\JeffAPI;
 use MrJeff\CommonBundle\Model\JeffPositionAPI;
 use MrJeff\CommonBundle\Model\LanguageAPI;
+use MrJeff\CommonBundle\Model\MetadataAPI;
 use MrJeff\CommonBundle\Model\OrderAPI;
 use MrJeff\CommonBundle\Model\OrderProductAPI;
 use MrJeff\CommonBundle\Model\PaymentMethodAPI;
@@ -30,14 +31,15 @@ class DataTransformerAPI
     public static function transformDescriptionDataToObject($description)
     {
         $descriptionAPI = new DescriptionAPI();
-        $descriptionAPI->setId($description->idProductDescription);
-        $descriptionAPI->setName($description->name);
-        $descriptionAPI->setDescription($description->description);
+        $descriptionAPI->setIdProductDescription(isset($description->idProductDescription) ? $description->idProductDescription : null);
+        $descriptionAPI->setName(isset($description->name) ? $description->name : null);
+        $descriptionAPI->setDescription(isset($description->description) ? $description->description : null);
 
-        $language = $description->language;
-        $languageAPI = self::transformLanguageDataToObject($language);
+        if(isset($description->language)){
+            $languageAPI = self::transformLanguageDataToObject($description->language);
 
-        $descriptionAPI->setLanguage($languageAPI);
+            $descriptionAPI->setLanguage($languageAPI);
+        }
 
         return $descriptionAPI;
     }
@@ -49,11 +51,16 @@ class DataTransformerAPI
      */
     public static function transformCategoryDataToObject(\stdClass $category)
     {
-        $categoryAPI = new CategoryAPI();
-        $categoryAPI->setId($category->idCategory);
-        $categoryAPI->setName($category->name);
+        try{
+            $categoryAPI = new CategoryAPI();
+            $categoryAPI->setId(isset($category->idCategory) ? $category->idCategory : null);
+            $categoryAPI->setName(isset($category->name) ? $category->name : null);
+            $categoryAPI->setIdOpenBravo(isset($category->idOpenBravo) ? $category->idOpenBravo : null);
 
-        return $categoryAPI;
+            return $categoryAPI;
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     /**
@@ -64,10 +71,10 @@ class DataTransformerAPI
     public static function transformPaymentMethodDataToObject(\stdClass $paymentMethodOrder)
     {
         $paymentMethodAPI = new PaymentMethodAPI();
-        $paymentMethodAPI->setId($paymentMethodOrder->idPaymentMethod);
-        $paymentMethodAPI->setName($paymentMethodOrder->name);
-        $paymentMethodAPI->setDescription($paymentMethodOrder->description);
-        $paymentMethodAPI->setDeleted($paymentMethodOrder->deleted);
+        $paymentMethodAPI->setId(isset($paymentMethodOrder->idPaymentMethod) ? $paymentMethodOrder->idPaymentMethod : null);
+        $paymentMethodAPI->setName(isset($paymentMethodOrder->name) ? $paymentMethodOrder->name : null);
+        $paymentMethodAPI->setDescription(isset($paymentMethodOrder->description) ? $paymentMethodOrder->description : null);
+        $paymentMethodAPI->setDeleted(isset($paymentMethodOrder->deleted) ? $paymentMethodOrder->deleted : null);
 
         return $paymentMethodAPI;
     }
@@ -80,12 +87,12 @@ class DataTransformerAPI
     public static function transformJeffDataToObject(\stdClass $jeffOrder)
     {
         $jeffAPI = new JeffAPI();
-        $jeffAPI->setId($jeffOrder->id);
-        $jeffAPI->setName($jeffOrder->name);
-        $jeffAPI->setEmail($jeffOrder->email);
-        $jeffAPI->setOrganizationId($jeffOrder->organizationId);
-        $jeffAPI->setOrganizationName($jeffOrder->organizationName);
-        $jeffAPI->setCity($jeffOrder->city);
+        $jeffAPI->setId(isset($jeffOrder->id) ? $jeffOrder->id : null);
+        $jeffAPI->setName(isset($jeffOrder->name) ? $jeffOrder->name : null);
+        $jeffAPI->setEmail(isset($jeffOrder->email) ? $jeffOrder->email : null);
+        $jeffAPI->setOrganizationId(isset($jeffOrder->organizationId) ? $jeffOrder->organizationId : null);
+        $jeffAPI->setOrganizationName(isset($jeffOrder->organizationName) ? $jeffOrder->organizationName : null);
+        $jeffAPI->setCity(isset($jeffOrder->city) ? $jeffOrder->city : null);
 
         return $jeffAPI;
     }
@@ -98,9 +105,9 @@ class DataTransformerAPI
     public static function transformStateOrderDataToObject(\stdClass $stateOrder)
     {
         $stateOrderAPI = new StateOrderAPI();
-        $stateOrderAPI->setCodeStatus($stateOrder->codeStatus);
-        $stateOrderAPI->setName($stateOrder->name);
-        $stateOrderAPI->setDescription($stateOrder->description);
+        $stateOrderAPI->setCodeStatus(isset($stateOrder->codeStatus) ? $stateOrder->codeStatus : null);
+        $stateOrderAPI->setName(isset($stateOrder->name) ? $stateOrder->name : null);
+        $stateOrderAPI->setDescription(isset($stateOrder->description) ? $stateOrder->description : null);
 
         return $stateOrderAPI;
     }
@@ -113,8 +120,8 @@ class DataTransformerAPI
     public static function transformLanguageDataToObject(\stdClass $language)
     {
         $languageAPI = new LanguageAPI();
-        $languageAPI->setCodeLanguage($language->codeLanguage);
-        $languageAPI->setDescription($language->description);
+        $languageAPI->setCodeLanguage(isset($language->codeLanguage) ? $language->codeLanguage : null);
+        $languageAPI->setDescription(isset($language->description) ? $language->description : null);
 
         return $languageAPI;
     }
@@ -127,15 +134,30 @@ class DataTransformerAPI
     public static function transformPriceDataToObject(\stdClass $price)
     {
         $priceAPI = new PriceAPI();
-        $priceAPI->setId($price->idPrice);
-        $priceAPI->setPrice($price->price);
-        $priceAPI->setCodeBadge($price->codeBadge);
-        $priceAPI->setPercent($price->percent);
-        $priceAPI->setCountry($price->country);
-        $priceAPI->setCity($price->city);
-        $priceAPI->setPostalCode($price->postalCode);
+        $priceAPI->setId(isset($price->idPrice) ? $price->idPrice : null);
+        $priceAPI->setPrice(isset($price->price) ? $price->price : null);
+        $priceAPI->setCodeBadge(isset($price->codeBadge) ? $price->codeBadge : null);
+        $priceAPI->setPercent(isset($price->percent) ? $price->percent : null);
+        $priceAPI->setCountry(isset($price->country) ? $price->country : null);
+        $priceAPI->setCity(isset($price->city) ? $price->city : null);
+        $priceAPI->setPostalCode(isset($price->postalCode) ? $price->postalCode : null);
 
         return $priceAPI;
+    }
+
+    /**
+     * @param \stdClass $metadata
+     *
+     * @return MetadataAPI
+     */
+    public static function transformMetadataDataToObject(\stdClass $metadata)
+    {
+        $metadataAPI = new MetadataAPI();
+        $metadataAPI->setId(isset($metadata->idPrice) ? $metadata->idPrice : null);
+        $metadataAPI->setName(isset($metadata->name) ? $metadata->name : null);
+        $metadataAPI->setValue(isset($metadata->value) ? $metadata->value : null);
+
+        return $metadataAPI;
     }
 
     /**
@@ -146,16 +168,16 @@ class DataTransformerAPI
     public static function transformClientDataToObject(\stdClass $clientOrder)
     {
         $clientAPI = new ClientAPI();
-        $clientAPI->setId($clientOrder->idClient);
-        $clientAPI->setName($clientOrder->name);
-        $clientAPI->setLastname($clientOrder->lastname);
-        $clientAPI->setEmail($clientOrder->email);
-        $clientAPI->setDeleted($clientOrder->deleted);
-        $clientAPI->setIdWoocommerce($clientOrder->idWoocommerce);
-        $clientAPI->setIdOpenBravo($clientOrder->idOpenBravo);
-        $clientAPI->setCreationDate($clientOrder->creationDate);
-        $clientAPI->setUpdateDate($clientOrder->updateDate);
-        $clientAPI->setPassword($clientOrder->password);
+        $clientAPI->setId(isset($clientOrder->idClient) ? $clientOrder->idClient : null);
+        $clientAPI->setName(isset($clientOrder->name) ? $clientOrder->name : null);
+        $clientAPI->setLastname(isset($clientOrder->lastname) ? $clientOrder->lastname : null);
+        $clientAPI->setEmail(isset($clientOrder->email) ? $clientOrder->email : null);
+        $clientAPI->setDeleted(isset($clientOrder->deleted) ? $clientOrder->deleted : null);
+        $clientAPI->setIdWoocommerce(isset($clientOrder->idWoocommerce) ? $clientOrder->idWoocommerce : null);
+        $clientAPI->setIdOpenBravo(isset($clientOrder->idOpenBravo) ? $clientOrder->idOpenBravo : null);
+        $clientAPI->setCreationDate(isset($clientOrder->creationDate) ? $clientOrder->creationDate : null);
+        $clientAPI->setUpdateDate(isset($clientOrder->updateDate) ? $clientOrder->updateDate : null);
+        $clientAPI->setUpdateUser(isset($clientOrder->password) ? $clientOrder->password : null);
 
         return $clientAPI;
     }
@@ -167,14 +189,50 @@ class DataTransformerAPI
      */
     public static function transformProductDataToObject(\stdClass $product)
     {
-        $productAPI = new ProductAPI();
-        $productAPI->setId($product->idProduct);
-        $productAPI->setReference($product->reference);
-        $productAPI->setAppVisible($product->appVisible);
-        $productAPI->setActive($product->active);
-        $productAPI->setDeleted($product->deleted);
+        try{
+            $productAPI = new ProductAPI();
+            $productAPI->setId(isset($product->idProduct) ? $product->idProduct : null);
+            $productAPI->setIdWooCommerce(isset($product->idWoocommerce) ? $product->idWoocommerce : null);
+            $productAPI->setAppVisible(isset($product->appVisible) ? $product->appVisible : null);
+            $productAPI->setActive(isset($product->active) ? $product->active : null);
+            $productAPI->setDeleted(isset($product->deleted) ? $product->deleted : null);
+            $productAPI->setPack(isset($product->pack) ? $product->pack : null);
 
-        return $productAPI;
+            foreach($product->categories as $category){
+                $categoryAPI = DataTransformerAPI::transformCategoryDataToObject($category);
+
+                $productAPI->addCategory($categoryAPI);
+            }
+
+
+            foreach ($product->descriptions as $description) {
+                $descriptionAPI = DataTransformerAPI::transformDescriptionDataToObject($description);
+
+                $productAPI->addDescription($descriptionAPI);
+            }
+
+            foreach ($product->prices as $price) {
+                $priceAPI = DataTransformerAPI::transformPriceDataToObject($price);
+
+                $productAPI->addPrice($priceAPI);
+            }
+
+            foreach ($product->metadata as $metadata) {
+                $metadataAPI = DataTransformerAPI::transformMetadataDataToObject($metadata);
+
+                $productAPI->addMetadata($metadataAPI);
+            }
+
+            $productAPI->setUrl(isset($product->url) ? $product->url : null);
+            $productAPI->setCreationDate(isset($product->creationDate) ? $product->creationDate : null);
+            $productAPI->setCreationUser(isset($product->creationUser) ? $product->creationUser : null);
+            $productAPI->setUpdateDate(isset($product->updateDate) ? $product->updateDate: null);
+            $productAPI->setUpdateUser(isset($product->updateUser) ? $product->updateUser: null);
+
+            return $productAPI;
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     /**
@@ -185,11 +243,11 @@ class DataTransformerAPI
     public static function transformJeffPositionDataToObject(\stdClass $position)
     {
         $jeffPosition = new JeffPositionAPI();
-        $jeffPosition->setId($position->idJeffPosition);
-        $jeffPosition->setLatitude($position->latitude);
-        $jeffPosition->setLongitude($position->longitude);
-        $jeffPosition->setCurDate($position->curDate);
-        $jeffPosition->setCity($position->city);
+        $jeffPosition->setId(isset($position->idJeffPosition) ? $position->idJeffPosition : null);
+        $jeffPosition->setLatitude(isset($position->latitude) ? $position->latitude : null);
+        $jeffPosition->setLongitude(isset($position->longitude) ? $position->longitude : null);
+        $jeffPosition->setCurDate(isset($position->curDate) ? $position->curDate : null);
+        $jeffPosition->setCity(isset($position->city) ? $position->city : null);
 
         return $jeffPosition;
     }
@@ -202,10 +260,10 @@ class DataTransformerAPI
     public static function transformReviewDataToObject($review)
     {
         $reviewAPI = new ReviewAPI();
-        $reviewAPI->setValue($review->value);
-        $reviewAPI->setName($review->name);
-        $reviewAPI->setDescription($review->description);
-        $reviewAPI->setCustomer($review->customer);
+        $reviewAPI->setValue(isset($review->value) ? $review->value : null);
+        $reviewAPI->setName(isset($review->name) ? $review->name : null);
+        $reviewAPI->setDescription(isset($review->description) ? $review->description : null);
+        $reviewAPI->setCustomer(isset($review->customer) ? $review->customer : null);
 
 
         return $reviewAPI;
@@ -313,13 +371,13 @@ class DataTransformerAPI
         $valorationAPI = new ValorationAPI();
         $order = $valoration->order;
         $orderAPI = self::transformOrderDataToObject($order);
-        $valorationAPI->setOrder($orderAPI);
-        $valorationAPI->setMedia($valoration->media);
-        $valorationAPI->setRateJeff($valoration->rateJeff);
-        $valorationAPI->setRateClothes($valoration->rateClothes);
-        $valorationAPI->setRecomended($valoration->recomended);
-        $valorationAPI->setUsedAgain($valoration->usedAgain);
-        $valorationAPI->setNotes($valoration->notes);
+        $valorationAPI->setOrder(isset($orderAPI) ? $orderAPI : null);
+        $valorationAPI->setMedia(isset($valoration->media) ? $valoration->media : null);
+        $valorationAPI->setRateJeff(isset($valoration->rateJeff) ? $valoration->rateJeff : null);
+        $valorationAPI->setRateClothes(isset($valoration->rateClothes) ? $valoration->rateClothes : null);
+        $valorationAPI->setRecomended(isset($valoration->recomended) ? $valoration->recomended : null);
+        $valorationAPI->setUsedAgain(isset($valoration->usedAgain) ? $valoration->usedAgain : null);
+        $valorationAPI->setNotes(isset($valoration->notes) ? $valoration->notes : null);
 
         return $valorationAPI;
     }
@@ -332,14 +390,21 @@ class DataTransformerAPI
     public static function transformAddressDataToObject(\stdClass $address)
     {
         $addressAPI = new AddressAPI();
-        $addressAPI->setId($address->id);
-        $addressAPI->setPostalCode($address->postalCode);
-        $addressAPI->setCity($address->city);
-        $addressAPI->setCountry($address->country);
-        $addressAPI->setIdOpenBravo($address->idOpenBravo);
-        $addressAPI->setAddress($address->address);
-        $addressAPI->setCreationDate($address->creationDate);
-        $addressAPI->setUpdateDate($address->updateDate);
+        $addressAPI->setId(isset($address->id) ? $address->id : 0);
+        $addressAPI->setName(isset($address->name) ? $address->name: null);
+        $addressAPI->setPostalCode(isset($address->postalCode) ? $address->postalCode : null);
+        $addressAPI->setPhone(isset($address->phone) ? $address->phone : null);
+        $addressAPI->setZone(isset($address->zone) ? $address->zone : null);
+        $addressAPI->setCity(isset($address->city) ? $address->city : null);
+        $addressAPI->setState(isset($address->state) ? $address->state : null);
+        $addressAPI->setCountry(isset($address->country) ? $address->country : null);
+        $addressAPI->setIdOpenBravo(isset($address->idOpenBravo) ? $address->idOpenBravo : null);
+        $addressAPI->setAddress(isset($address->address) ? $address->address : null);
+        $addressAPI->setCreationDate(isset($address->creationDate) ? $address->creationDate : null);
+        $addressAPI->setCreationUser(isset($address->creationUser) ? $address->creationUser : null);
+        $addressAPI->setUpdateDate(isset($address->updateDate) ? $address->updateDate : null);
+        $addressAPI->setUpdateUser(isset($address->updateUser) ? $address->updateUser : null);
+        $addressAPI->setIsTimeTableOffice(isset($address->isTimeTableOffice) ? $address->isTimeTableOffice : null);
 
         return $addressAPI;
     }

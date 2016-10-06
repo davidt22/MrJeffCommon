@@ -28,40 +28,24 @@ class ProductOperationsAPI
 
     /**
      * @param array $filterFields
+     * @param string $token
      *
-     * @return array|bool
+     * @return array
      * @throws \Exception
      */
-    public function findProducts($filterFields = array('key' => 'value'))
+    public function findProducts($filterFields = array('key' => 'value'), $token = '')
     {
         try{
             $methodUrl = self::METHOD_PRODUCT_FIND;
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $methodUrl, $filterFields);
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $methodUrl, $filterFields, $token);
 
-            if($responseAPI->haveError == false){
+            if($responseAPI->codeResult == false){
                 $products = array();
 
                 if($responseAPI->isEmpty == false){
 
-                    foreach ($responseAPI->product as $product){
+                    foreach ($responseAPI->data as $product){
                         $productAPI = DataTransformerAPI::transformProductDataToObject($product);
-
-                        //TODO: Refactorizar en un metodo, el mismo bloque esta tambien en DataTransformerAPI::transformOrderDataToObject()
-                        $category = $product->category;
-                        $categoryAPI = DataTransformerAPI::transformCategoryDataToObject($category);
-                        $productAPI->setCategory($categoryAPI);
-
-                        foreach ($product->descriptions as $description) {
-                            $descriptionAPI = DataTransformerAPI::transformDescriptionDataToObject($description);
-
-                            $productAPI->addDescription($descriptionAPI);
-                        }
-
-                        foreach ($product->prices as $price) {
-                            $priceAPI = DataTransformerAPI::transformPriceDataToObject($price);
-
-                            $productAPI->addPrice($priceAPI);
-                        }
 
                         array_push($products, $productAPI);
                     }

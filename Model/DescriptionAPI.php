@@ -4,10 +4,10 @@
 namespace MrJeff\CommonBundle\Model;
 
 
-class DescriptionAPI
+class DescriptionAPI implements \JsonSerializable
 {
-    /** @var integer $id */
-    private $id;
+    /** @var integer $idProductDescription */
+    private $idProductDescription;
 
     /** @var  string $name */
     private $name;
@@ -21,17 +21,17 @@ class DescriptionAPI
     /**
      * @return int
      */
-    public function getId()
+    public function getIdProductDescription()
     {
-        return $this->id;
+        return $this->idProductDescription;
     }
 
     /**
-     * @param int $id
+     * @param int $idProductDescription
      */
-    public function setId($id)
+    public function setIdProductDescription($idProductDescription)
     {
-        $this->id = $id;
+        $this->idProductDescription = $idProductDescription;
     }
 
     /**
@@ -80,5 +80,22 @@ class DescriptionAPI
     public function setLanguage($language)
     {
         $this->language = $language;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'idProductDescription' => $this->idProductDescription,
+            'name' => $this->name,
+            'description' => $this->description,
+            'language' => $this->language
+        );
     }
 }

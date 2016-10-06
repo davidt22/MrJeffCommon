@@ -4,16 +4,16 @@
 namespace MrJeff\CommonBundle\Model;
 
 
-class CategoryAPI implements \JsonSerializable
+class MetadataAPI implements \JsonSerializable
 {
-    /** @var integer $id */
+    /** @var int $id */
     private $id;
 
-    /** @var string $name */
+    /** @var string */
     private $name;
 
     /** @var string */
-    private $idOpenBravo;
+    private $value;
 
     /**
      * @return int
@@ -50,17 +50,17 @@ class CategoryAPI implements \JsonSerializable
     /**
      * @return string
      */
-    public function getIdOpenBravo()
+    public function getValue()
     {
-        return $this->idOpenBravo;
+        return $this->value;
     }
 
     /**
-     * @param string $idOpenBravo
+     * @param string $value
      */
-    public function setIdOpenBravo($idOpenBravo)
+    public function setValue($value)
     {
-        $this->idOpenBravo = $idOpenBravo;
+        $this->value = $value;
     }
 
     /**
@@ -75,7 +75,7 @@ class CategoryAPI implements \JsonSerializable
         return array(
             'id' => $this->id,
             'name' => $this->name,
-            'idOpenBravo' => $this->idOpenBravo
+            'value' => $this->value
         );
     }
 }
