@@ -4,7 +4,7 @@
 namespace MrJeff\CommonBundle\Model;
 
 
-class UserAPI
+class UserAPI implements \JsonSerializable
 {
     /** @var int $id */
     private $id;
@@ -107,5 +107,23 @@ class UserAPI
     public function setToken($token)
     {
         $this->token = $token;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'token' => $this->token
+        );
     }
 }

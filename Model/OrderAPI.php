@@ -6,7 +6,7 @@ namespace MrJeff\CommonBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class OrderAPI
+class OrderAPI implements \JsonSerializable
 {
     /** @var int $id */
     private $id;
@@ -468,5 +468,35 @@ class OrderAPI
     {
         $this->active = $active;
     }
+
+    function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'client' => $this->client,
+            'dateOrder' => $this->dateOrder,
+            'dateDelivery' => $this->dateDelivery,
+            'datePickUp' => $this->datePickUp,
+            'note' => $this->note,
+            'paymentMethod' => $this->paymentMethod,
+            'jeff' => $this->jeff,
+            'stateOrder' => $this->stateOrder,
+            'dateDeliveryTransport' => $this->dateDeliveryTransport,
+            'datePickUpTransport' => $this->datePickUpTransport,
+            'dateWashingDelivery' => $this->dateWashingDelivery,
+            'dateWashingPickup' => $this->dateWashingPickup,
+            'bigBag' => $this->bigBag,
+            'smallBag' => $this->smallBag,
+            'hunger' => $this->hunger,
+            'addressPickUp' => $this->addressPickUp,
+            'addressDelivery' => $this->addressDelivery,
+            'metNote' => $this->metNote,
+            'valueNote' => $this->valueNote,
+            'deleted' => $this->deleted,
+            'active' => $this->active,
+            'orderProducts' => $this->orderProducts,
+        );
+    }
+
 
 }

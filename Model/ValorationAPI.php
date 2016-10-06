@@ -4,7 +4,7 @@
 namespace MrJeff\CommonBundle\Model;
 
 
-class ValorationAPI
+class ValorationAPI implements \JsonSerializable
 {
     /** @var OrderAPI $order */
     private $order;
@@ -139,4 +139,23 @@ class ValorationAPI
         $this->notes = $notes;
     }
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'order' => $this->order,
+            'media' => $this->media,
+            'rateJeff' => $this->rateJeff,
+            'rateClothes' => $this->rateClothes,
+            'recomended' => $this->recomended,
+            'usedAgain' => $this->usedAgain,
+            'notes' => $this->notes
+        );
+    }
 }

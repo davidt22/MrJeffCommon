@@ -4,7 +4,7 @@
 namespace MrJeff\CommonBundle\Model;
 
 
-class JeffAPI
+class JeffAPI implements \JsonSerializable
 {
     /** @var integer $id */
     private $id;
@@ -120,5 +120,18 @@ class JeffAPI
     {
         $this->city = $city;
     }
+
+    function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'organizationId' => $this->organizationId,
+            'organizationName' => $this->organizationName,
+            'city' => $this->city
+        );
+    }
+
 
 }
