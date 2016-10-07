@@ -86,16 +86,12 @@ class RequestManagerAPI
                 $statusCode = $response->getStatusCode();
 
                 if ($statusCode == Response::HTTP_OK) {
+                    $response->getBody()->rewind(); //Always rewind the Stream
                     $content = $response->getBody()->getContents();
                     $content = json_decode($content);
 
-                    //De momento lo comento hasta que se unifiquen todas las Responses del API, las trataremos dentro de cada servicio
-                    //                $hasNotErrors = $content->error == false || $content->codeError == 0;
-                    //                if($hasNotErrors){
                     return $content;
-                    //                }else{
-                    //                    return false;
-                    //                }
+
                 }elseif($statusCode == Response::HTTP_BAD_REQUEST){
                     throw new \Exception('Error: API returns BAD REQUEST.');
                 }elseif($statusCode == Response::HTTP_UNAUTHORIZED){

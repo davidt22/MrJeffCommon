@@ -309,12 +309,7 @@ class AddressAPI implements \JsonSerializable
             'city' => $this->city,
             'state' => $this->state,
             'country' => $this->country,
-            'idOpenBravo' => $this->idOpenBravo,
             'address' => $this->address,
-            'creationDate' => $this->creationDate,
-            'creationUser' => $this->creationUser,
-            'updateDate' => $this->updateDate,
-            'updateUser' => $this->updateUser,
             'isTimeTableOffice' => $this->isTimeTableOffice
         );
     }

@@ -18,6 +18,9 @@ class ClientAPI implements \JsonSerializable
     /** @var string $email */
     private $email;
 
+    /** @var string */
+    private $password;
+
     /** @var ArrayCollection $addresses */
     private $addresses;
 
@@ -259,6 +262,22 @@ class ClientAPI implements \JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -272,14 +291,9 @@ class ClientAPI implements \JsonSerializable
             'name' => $this->name,
             'lastname' => $this->lastname,
             'email' => $this->email,
+            'password' => $this->password,
             'addresses' => $this->addresses->toArray(),
-            'deleted' => $this->deleted,
-            'idWoocommerce' => $this->idWoocommerce,
-            'idOpenBravo' => $this->idOpenBravo,
-            'creationDate' => $this->creationDate,
-            'creationUser' => $this->creationUser,
-            'updateDate' => $this->updateDate,
-            'updateUser' => $this->updateUser,
+            'deleted' => $this->deleted
         );
     }
 }

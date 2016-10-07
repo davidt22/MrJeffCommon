@@ -161,23 +161,30 @@ class DataTransformerAPI
     }
 
     /**
-     * @param \stdClass $clientOrder
+     * @param \stdClass $client
      *
      * @return ClientAPI
      */
-    public static function transformClientDataToObject(\stdClass $clientOrder)
+    public static function transformClientDataToObject(\stdClass $client)
     {
         $clientAPI = new ClientAPI();
-        $clientAPI->setId(isset($clientOrder->idClient) ? $clientOrder->idClient : null);
-        $clientAPI->setName(isset($clientOrder->name) ? $clientOrder->name : null);
-        $clientAPI->setLastname(isset($clientOrder->lastname) ? $clientOrder->lastname : null);
-        $clientAPI->setEmail(isset($clientOrder->email) ? $clientOrder->email : null);
-        $clientAPI->setDeleted(isset($clientOrder->deleted) ? $clientOrder->deleted : null);
-        $clientAPI->setIdWoocommerce(isset($clientOrder->idWoocommerce) ? $clientOrder->idWoocommerce : null);
-        $clientAPI->setIdOpenBravo(isset($clientOrder->idOpenBravo) ? $clientOrder->idOpenBravo : null);
-        $clientAPI->setCreationDate(isset($clientOrder->creationDate) ? $clientOrder->creationDate : null);
-        $clientAPI->setUpdateDate(isset($clientOrder->updateDate) ? $clientOrder->updateDate : null);
-        $clientAPI->setUpdateUser(isset($clientOrder->password) ? $clientOrder->password : null);
+        $clientAPI->setId(isset($client->idClient) ? $client->idClient : null);
+        $clientAPI->setName(isset($client->name) ? $client->name : null);
+        $clientAPI->setLastname(isset($client->lastname) ? $client->lastname : null);
+        $clientAPI->setEmail(isset($client->email) ? $client->email : null);
+        $clientAPI->setPassword(isset($client->password) ? $client->password : null);
+        $clientAPI->setDeleted(isset($client->deleted) ? $client->deleted : null);
+//        $clientAPI->setIdWoocommerce(isset($clientOrder->idWoocommerce) ? $clientOrder->idWoocommerce : null);
+//        $clientAPI->setIdOpenBravo(isset($clientOrder->idOpenBravo) ? $clientOrder->idOpenBravo : null);
+        $clientAPI->setCreationDate(isset($client->creationDate) ? $client->creationDate : null);
+        $clientAPI->setUpdateDate(isset($client->updateDate) ? $client->updateDate : null);
+        $clientAPI->setUpdateUser(isset($client->password) ? $client->password : null);
+
+        foreach($client->addresses as $address){
+            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
+
+            $clientAPI->addAddress($addressAPI);
+        }
 
         return $clientAPI;
     }
@@ -398,13 +405,13 @@ class DataTransformerAPI
         $addressAPI->setCity(isset($address->city) ? $address->city : null);
         $addressAPI->setState(isset($address->state) ? $address->state : null);
         $addressAPI->setCountry(isset($address->country) ? $address->country : null);
-        $addressAPI->setIdOpenBravo(isset($address->idOpenBravo) ? $address->idOpenBravo : null);
+//        $addressAPI->setIdOpenBravo(isset($address->idOpenBravo) ? $address->idOpenBravo : null);
         $addressAPI->setAddress(isset($address->address) ? $address->address : null);
         $addressAPI->setCreationDate(isset($address->creationDate) ? $address->creationDate : null);
         $addressAPI->setCreationUser(isset($address->creationUser) ? $address->creationUser : null);
         $addressAPI->setUpdateDate(isset($address->updateDate) ? $address->updateDate : null);
         $addressAPI->setUpdateUser(isset($address->updateUser) ? $address->updateUser : null);
-        $addressAPI->setIsTimeTableOffice(isset($address->isTimeTableOffice) ? $address->isTimeTableOffice : null);
+//        $addressAPI->setIsTimeTableOffice(isset($address->isTimeTableOffice) ? $address->isTimeTableOffice : null);
 
         return $addressAPI;
     }

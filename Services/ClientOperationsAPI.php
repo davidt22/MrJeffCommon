@@ -45,25 +45,9 @@ class ClientOperationsAPI
                 if($responseAPI->isEmpty == false){
 
                     foreach ($responseAPI->data as $client){
-                        $userAPI = new ClientAPI();
-                        $userAPI->setId($client->id);
-                        $userAPI->setName($client->name);
-                        $userAPI->setLastname($client->lastname);
-                        $userAPI->setEmail($client->email);
-                        $userAPI->setDeleted($client->deleted);
-                        $userAPI->setIdWoocommerce($client->idWoocommerce);
-                        $userAPI->setIdOpenBravo($client->idOpenBravo);
-                        $userAPI->setCreationDate($client->creationDate);
-                        $userAPI->setUpdateDate($client->updateDate);
-                        $userAPI->setUpdateUser($client->updateUser);
+                        $clientAPI = DataTransformerAPI::transformClientDataToObject($client);
 
-                        foreach($client->addresses as $address){
-                            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
-
-                            $userAPI->addAddress($addressAPI);
-                        }
-
-                        array_push($users, $userAPI);
+                        array_push($users, $clientAPI);
                     }
                 }
 
@@ -87,40 +71,21 @@ class ClientOperationsAPI
     {
         try{
             $uri = self::METHOD_CLIENT_ADD;
-            $data = json_encode($clientAPI);
+            $data = $clientAPI;
+
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $uri, $data, $token);
 
-            if($responseAPI->codeResult == 0){
-                $clientAPI = array();
+            if($responseAPI != null && $responseAPI->haveError == false){
 
-                if($responseAPI->isEmpty == false){
+                if(count($responseAPI->data) == 1){
 
-                    foreach ($responseAPI->data as $client){
-                        $userAPI = new ClientAPI();
-                        $userAPI->setId($client->id);
-                        $userAPI->setName($client->name);
-                        $userAPI->setLastname($client->lastname);
-                        $userAPI->setEmail($client->email);
-                        $userAPI->setDeleted($client->deleted);
-                        $userAPI->setIdWoocommerce($client->idWoocommerce);
-                        $userAPI->setIdOpenBravo($client->idOpenBravo);
-                        $userAPI->setCreationDate($client->creationDate);
-                        $userAPI->setUpdateDate($client->updateDate);
-                        $userAPI->setUpdateUser($client->updateUser);
-
-                        foreach($client->addresses as $address){
-                            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
-
-                            $userAPI->addAddress($addressAPI);
-                        }
-
-                        array_push($clientAPI, $userAPI);
-                    }
+                    $client = $responseAPI->data;
+                    $clientAPI = DataTransformerAPI::transformClientDataToObject($client);
                 }
 
                 return $clientAPI;
             }else{
-                throw new \Exception('Error: ' . $responseAPI->messageError);
+                throw new \Exception('Error: ' . $responseAPI->messageError ? $responseAPI->messageError : 'Response is empty.');
             }
         }catch(\Exception $e){
             throw new \Exception($e->getMessage());
@@ -128,51 +93,29 @@ class ClientOperationsAPI
     }
 
     /**
-     * @param array $users
+     * @param ClientAPI $clientAPI
+     * @param string $token
      *
      * @return array
      * @throws \Exception
      */
-    public function updateClient($users = array('key' => 'value'))
+    public function updateClient(ClientAPI $clientAPI, $token = '')
     {
         try{
             $uri = self::METHOD_CLIENT_UPDATE;
-            $data = array(
-                'client' => $users
-            );
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_PUT, $uri, $data);
+            $data = $clientAPI;
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_PUT, $uri, $data, $token);
 
-            if($responseAPI->codeResult == 0){
-                $users = array();
+            if($responseAPI != null && $responseAPI->haveError == false){
 
-                if($responseAPI->isEmpty == false){
-
-                    foreach ($responseAPI->data as $client){
-                        $userAPI = new ClientAPI();
-                        $userAPI->setId($client->id);
-                        $userAPI->setName($client->name);
-                        $userAPI->setLastname($client->lastname);
-                        $userAPI->setEmail($client->email);
-                        $userAPI->setDeleted($client->deleted);
-                        $userAPI->setIdWoocommerce($client->idWoocommerce);
-                        $userAPI->setIdOpenBravo($client->idOpenBravo);
-                        $userAPI->setCreationDate($client->creationDate);
-                        $userAPI->setUpdateDate($client->updateDate);
-                        $userAPI->setUpdateUser($client->updateUser);
-
-                        foreach($client->addresses as $address){
-                            $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
-
-                            $userAPI->addAddress($addressAPI);
-                        }
-
-                        array_push($users, $userAPI);
-                    }
+                if(count($responseAPI->data) == 1){
+                    $client = $responseAPI->data;
+                    $clientAPI = DataTransformerAPI::transformClientDataToObject($client);
                 }
 
-                return $users;
+                return $clientAPI;
             }else{
-                throw new \Exception('Error: ' . $responseAPI->messageError);
+                throw new \Exception('Error: ' . $responseAPI->messageError ? $responseAPI->messageError : 'Response is empty.');
             }
         }catch(\Exception $e){
             throw new \Exception($e->getMessage());
@@ -180,44 +123,27 @@ class ClientOperationsAPI
     }
 
     /**
-     * @param int $userId
+     * @param ClientAPI $clientAPI
+     * @param string $token
      *
-     * @return array
+     * @return ClientAPI
      * @throws \Exception
      */
-    public function deleteClient($userId)
+    public function deleteClient(ClientAPI $clientAPI, $token = '')
     {
         try{
             $uri = self::METHOD_CLIENT_DELETE;
-            $data = array(
-                'id' => $userId
-            );
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $uri, $data);
+            $data = $clientAPI;
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $uri, $data, $token);
 
-            if($responseAPI->codeResult == 0){
+            if($responseAPI != null && $responseAPI->haveError == false){
                 $client = $responseAPI->client;
 
-                $userAPI = new ClientAPI();
-                $userAPI->setId($client->id);
-                $userAPI->setName($client->name);
-                $userAPI->setLastname($client->lastname);
-                $userAPI->setEmail($client->email);
-                $userAPI->setDeleted($client->deleted);
-                $userAPI->setIdWoocommerce($client->idWoocommerce);
-                $userAPI->setIdOpenBravo($client->idOpenBravo);
-                $userAPI->setCreationDate($client->creationDate);
-                $userAPI->setUpdateDate($client->updateDate);
-                $userAPI->setUpdateUser($client->updateUser);
+                DataTransformerAPI::transformClientDataToObject($client);
 
-                foreach($client->addresses as $address){
-                    $addressAPI = DataTransformerAPI::transformAddressDataToObject($address);
-
-                    $userAPI->addAddress($addressAPI);
-                }
-
-                return $userAPI;
+                return $clientAPI;
             }else{
-                throw new \Exception('Error: ' . $responseAPI->messageError);
+                throw new \Exception('Error: ' . $responseAPI->messageError ? $responseAPI->messageError : 'Response is empty.');
             }
         }catch(\Exception $e){
             throw new \Exception($e->getMessage());
