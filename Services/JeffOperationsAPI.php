@@ -12,7 +12,7 @@ class JeffOperationsAPI
     private $requestManagerAPI;
 
     /**
-     * AuthorizationAPI constructor.
+     * JeffOperationsAPI constructor.
      *
      * @param RequestManagerAPI $requestManagerAPI
      */

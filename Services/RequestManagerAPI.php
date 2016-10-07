@@ -10,31 +10,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RequestManagerAPI
 {
+    const METHOD_AUTHENTICATION = 'authentication';
     const APPLICATION_JSON = 'application/json';
 
     /** @var string $baseUrl */
     private $baseUrl;
 
+
     /**
      * RequestManagerAPI constructor.
      *
-     * @param string $apiUrl
+     * @param $apiUrl
      */
-    public function __construct($apiUrl = '')
+    public function __construct($apiUrl)
     {
         $this->baseUrl = $apiUrl;
     }
 
     /**
      * @param string $methodType
-     * @param string $methodUrl
+     * @param $methodUrl
      * @param array $bodyData
-     * @param string $token
+     * @param $token
      *
-     * @return mixed|string
+     * @return \stdClass $content
+     *
      * @throws \Exception
      */
-    public function sendRequest($methodType = Request::METHOD_GET, $methodUrl = '', $bodyData = array('key' => 'value'), $token = '')
+    public function sendRequest($methodType = Request::METHOD_GET, $methodUrl, $bodyData = array('key' => 'value'), $token = '')
     {
         try {
             $config = array(

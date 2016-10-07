@@ -19,6 +19,7 @@ use MrJeff\CommonBundle\Model\PriceAPI;
 use MrJeff\CommonBundle\Model\ProductAPI;
 use MrJeff\CommonBundle\Model\ReviewAPI;
 use MrJeff\CommonBundle\Model\StateOrderAPI;
+use MrJeff\CommonBundle\Model\UserAPI;
 use MrJeff\CommonBundle\Model\ValorationAPI;
 
 class DataTransformerAPI
@@ -414,5 +415,23 @@ class DataTransformerAPI
 //        $addressAPI->setIsTimeTableOffice(isset($address->isTimeTableOffice) ? $address->isTimeTableOffice : null);
 
         return $addressAPI;
+    }
+
+    /**
+     * @param \stdClass $responseAPI
+     * @param $password
+     *
+     * @return UserAPI
+     */
+    public static function transformUserDataToObject(\stdClass $responseAPI, $password)
+    {
+        $userAPI = new UserAPI();
+//        $userAPI->setId(isset($user->id) ? $user->id : null);
+        $userAPI->setName($responseAPI->user ? $responseAPI->user->name : null);
+        $userAPI->setEmail($responseAPI->user ? $responseAPI->user->email : null);
+        $userAPI->setPassword($password);
+        $userAPI->setToken($responseAPI->token ? $responseAPI->token : null);
+
+        return $userAPI;
     }
 }

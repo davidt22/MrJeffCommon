@@ -17,9 +17,9 @@ class ProductOperationsAPI
     private $requestManagerAPI;
 
     /**
-     * AuthorizationAPI constructor.
+     * ProductOperationsAPI constructor.
      *
-     * @param RequestManagerAPI $requestManagerAPI
+     * @param \MrJeff\CommonBundle\Services\RequestManagerAPI $requestManagerAPI
      */
     public function __construct(RequestManagerAPI $requestManagerAPI)
     {
@@ -28,12 +28,12 @@ class ProductOperationsAPI
 
     /**
      * @param array $filterFields
-     * @param string $token
+     * @param $token
      *
      * @return array
      * @throws \Exception
      */
-    public function findProducts($filterFields = array('key' => 'value'), $token = '')
+    public function findProducts($filterFields = array('key' => 'value'), $token)
     {
         try{
             $methodUrl = self::METHOD_PRODUCT_FIND;

@@ -13,48 +13,51 @@ class AuthorizationAPI
     /** @var RequestManagerAPI $requestManagerAPI */
     private $requestManagerAPI;
 
+    /** @var string */
+    private $email;
+
+    /** @var string */
+    private $password;
+
     /**
      * AuthorizationAPI constructor.
      *
      * @param RequestManagerAPI $requestManagerAPI
+     * @param $email
+     * @param $password
      */
-    public function __construct(RequestManagerAPI $requestManagerAPI)
+    public function __construct(RequestManagerAPI $requestManagerAPI, $email, $password)
     {
         $this->requestManagerAPI = $requestManagerAPI;
+        $this->email = $email;
+        $this->password = $password;
     }
 
     /**
-     * @param string $email
-     * @param string $password
-     *
      * @return bool|UserAPI
      * @throws \Exception
      */
-    public function authenticateUser($email = '', $password = '')
+    public function authenticateUser()
     {
         try{
             $methodUrl = self::METHOD_AUTHENTICATION;
             $data = array(
-                'email' => $email,
-                'password' => $password
+                'email' => $this->email,
+                'password' => $this->password
             );
             $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $methodUrl, $data);
 
             if($responseAPI->error == false){
-                $userAPI = new UserAPI();
-                $userAPI->setName($responseAPI->user->name);
-                $userAPI->setEmail($responseAPI->user->email);
-                $userAPI->setPassword($password);
-                $userAPI->setToken($responseAPI->token);
+                $userAPI = DataTransformerAPI::transformUserDataToObject($responseAPI, $this->password);
 
                 return $userAPI;
             }
 
-            //Other cases, returns false
-            return false;
+            //Other cases, throw exception
+            throw new \Exception('Error authenticating user.');
 
         }catch(\Exception $e){
-            throw new \Exception('Error authenticating user. ' . $e->getMessage());
+            throw new \Exception('Error: ' . $e->getMessage());
         }
     }
 

@@ -4,7 +4,7 @@ services:
         arguments: ['%api_url%']
     mrjeff.authorization_api:
         class: MrJeff\CommonBundle\Services\AuthorizationAPI
-        arguments: ['@mrjeff.request_manager_api']
+        arguments: ['@mrjeff.request_manager_api', '%api_email%', '%api_password%']
     mrjeff.data_transformer_api:
         class: MrJeff\CommonBundle\Services\DataTransformerAPI
     mrjeff.jeff_operations_api:

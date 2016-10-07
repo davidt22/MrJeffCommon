@@ -17,7 +17,7 @@ class ClientOperationsAPI
     private $requestManagerAPI;
 
     /**
-     * AuthorizationAPI constructor.
+     * ClientOperationsAPI constructor.
      *
      * @param RequestManagerAPI $requestManagerAPI
      */
@@ -28,12 +28,12 @@ class ClientOperationsAPI
 
     /**
      * @param array $filterFields
-     * @param string $token
+     * @param $token
      *
      * @return array
      * @throws \Exception
      */
-    public function findClients($filterFields = array('key' => 'value'), $token = '')
+    public function findClients($filterFields = array('key' => 'value'), $token)
     {
         try{
             $uri = self::METHOD_CLIENT_FIND;
@@ -62,12 +62,12 @@ class ClientOperationsAPI
 
     /**
      * @param ClientAPI $clientAPI
-     * @param string $token
+     * @param $token
      *
-     * @return array|ClientAPI
+     * @return ClientAPI
      * @throws \Exception
      */
-    public function addClient(ClientAPI $clientAPI, $token = '')
+    public function addClient(ClientAPI $clientAPI, $token)
     {
         try{
             $uri = self::METHOD_CLIENT_ADD;
@@ -94,12 +94,12 @@ class ClientOperationsAPI
 
     /**
      * @param ClientAPI $clientAPI
-     * @param string $token
+     * @param $token
      *
-     * @return array
+     * @return ClientAPI
      * @throws \Exception
      */
-    public function updateClient(ClientAPI $clientAPI, $token = '')
+    public function updateClient(ClientAPI $clientAPI, $token)
     {
         try{
             $uri = self::METHOD_CLIENT_UPDATE;
@@ -124,12 +124,12 @@ class ClientOperationsAPI
 
     /**
      * @param ClientAPI $clientAPI
-     * @param string $token
+     * @param $token
      *
      * @return ClientAPI
      * @throws \Exception
      */
-    public function deleteClient(ClientAPI $clientAPI, $token = '')
+    public function deleteClient(ClientAPI $clientAPI, $token)
     {
         try{
             $uri = self::METHOD_CLIENT_DELETE;
@@ -152,18 +152,19 @@ class ClientOperationsAPI
 
     /**
      * @param $addressId
+     * @param $token
      *
      * @return bool
      * @throws \Exception
      */
-    public function deleteClientAddress($addressId)
+    public function deleteClientAddress($addressId, $token)
     {
         try{
             $uri = self::METHOD_CLIENT_ADDRESS_DELETE;
             $data = array(
                 'idAddress' => $addressId
             );
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $uri, $data);
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_DELETE, $uri, $data, $token);
 
             if($responseAPI->codeResult == 0){
                 return true;

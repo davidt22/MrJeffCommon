@@ -21,7 +21,7 @@ class OrderOperationsAPI
     private $requestManagerAPI;
 
     /**
-     * AuthorizationAPI constructor.
+     * OrderOperationsAPI constructor.
      *
      * @param RequestManagerAPI $requestManagerAPI
      */
@@ -32,15 +32,16 @@ class OrderOperationsAPI
 
     /**
      * @param array $filterFields
+     * @param $token
      *
-     * @return array|bool
+     * @return array
      * @throws \Exception
      */
-    public function findOrders($filterFields = array('key' => 'value'))
+    public function findOrders($filterFields = array('key' => 'value'), $token)
     {
         try{
             $methodUrl = self::METHOD_ORDER_FIND;
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $methodUrl, $filterFields);
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $methodUrl, $filterFields, $token);
 
             if($responseAPI->haveError == false){
                 $orders = array();
@@ -64,18 +65,19 @@ class OrderOperationsAPI
 
     /**
      * @param OrderAPI $orderAPI
+     * @param $token
      *
      * @return OrderAPI
      * @throws \Exception
      */
-    public function addOrder(OrderAPI $orderAPI)
+    public function addOrder(OrderAPI $orderAPI, $token)
     {
         try{
             $methodUrl = self::METHOD_ORDER_ADD;
             $data = array(
                 'order' => $orderAPI
             );
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $methodUrl, $data);
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_POST, $methodUrl, $data, $token);
 
             if($responseAPI->haveError == false){
 

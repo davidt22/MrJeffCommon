@@ -14,7 +14,7 @@ class JeffPositionOperationsAPI
     private $requestManagerAPI;
 
     /**
-     * AuthorizationAPI constructor.
+     * JeffPositionOperationsAPI constructor.
      *
      * @param RequestManagerAPI $requestManagerAPI
      */
@@ -25,15 +25,17 @@ class JeffPositionOperationsAPI
 
     /**
      * @param array $filterFields
+     * @param $
+     * @param $token
      *
-     * @return array|bool
+     * @return array
      * @throws \Exception
      */
-    public function findJeffPosition($filterFields = array('key' => 'value'))
+    public function findJeffPosition($filterFields = array('key' => 'value'), $token)
     {
         try{
             $methodUrl = self::METHOD_POSITION_FIND;
-            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $methodUrl, $filterFields);
+            $responseAPI = $this->requestManagerAPI->sendRequest(Request::METHOD_GET, $methodUrl, $filterFields, $token);
 
             if($responseAPI->haveError == false){
                 $positions = array();
